@@ -1,22 +1,22 @@
 import unittest
 from Pension import * 
 class testPension(unittest.TestCase):
-    
+    def setUp(self):
+        self.p = Pension()
+
     def test_RecibePension(self):
-        p = Pension()
-        self.assertEqual(0, p.RecibePension())
+        self.assertEqual(0, self.p.RecibePension())
+
+##### PRUEBAS DE EDAD MAYOR QUE ANHO ACTUAL
 
     def test_Fecha_Ingresada_Mayor_Fecha_Actual1(self):
-        p = Pension()
-        self.assertEqual(0,p.CompararFecha(1995))
+        self.assertEqual(0,self.p.CompararFecha(1995))
 
     def test_Fecha_Ingresada_Mayor_Fecha_Actual2(self):
-        p = Pension()
-        self.assertEqual(0,p.CompararFecha(2007))
+        self.assertEqual(0,self.p.CompararFecha(2007))
 
     def test_Fecha_Ingresada_Mayor_Fecha_Actual3(self):
-        p = Pension()
-        self.assertEqual(0,p.CompararFecha(2020))
+        self.assertEqual(0,self.p.CompararFecha(2020))
 
 
 if __name__=="__main__":
