@@ -2,7 +2,7 @@ import time
 
 class Pension:
 
-    def RecibePension(self, anhoUsuario):
+    def RecibePension(self):
         return 0
     
     def CompararFecha(self, anhoUsuario):
@@ -16,4 +16,3 @@ class Pension:
 #fechaUsuario = input("Ingrese la fecha de nacimiento (dd/mm/aaaa): ")
 #anhoUsuario = fechaUsuario.split("/") #Se crea un vector de la forma [dd,mm,aaaa]
 #anhoUsuario = anhoUsuario[2]
-#p.ObtenerFecha()
