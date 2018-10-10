@@ -398,21 +398,21 @@ class PruebasMaliciaInsalubridad(unittest.TestCase):
         Prueba: Ejecuta la funcion con numero negativo bajo como parametro
         Resultado esperado: Excepcion ValueError
         '''
-        self.assertFalse(self.p.recibe_pension(1940, 'f', 1500, -1))
+        self.assertRaises(ValueError, self.p.recibe_pension, 1940, 'f', 1500, -1)
 
     def test_IntroduceInsalubridadNegativa2(self):
         '''
         Prueba: Ejecuta la funcion con numero negativo medio como parametro
         Resultado esperado: Excepcion ValueError
         '''
-        self.assertFalse(self.p.recibe_pension(1940, 'f', 1500, -100))
+        self.assertRaises(ValueError, self.p.recibe_pension, 1940, 'f', 1500, -100)
 
     def test_IntroduceInsalubridadNegativa3(self):
         '''
         Prueba: Ejecuta la funcion con numero negativo alto como parametro
         Resultado esperado: Excepcion ValueError
         '''
-        self.assertFalse(self.p.recibe_pension(1940, 'f', 1500, -10000000))
+        self.assertRaises(ValueError, self.p.recibe_pension, 1940, 'f', 1500, -10000000)
 
 if __name__=="__main__":
     unittest.main()
