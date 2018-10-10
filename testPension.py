@@ -84,8 +84,6 @@ class PruebasAnhoMayorQueActualMalicia(unittest.TestCase):
         self.p = Pension()
         self.p.anho_actual = 2018
 
-
-
     def tearDown(self):
         '''
         Elimina la instancia del modulo Pension
@@ -265,7 +263,15 @@ class PruebasCalcularEdadMalicia(unittest.TestCase):
         self.assertRaises(ValueError, self.p.calcular_edad, '10')
 
 
-class PruebasDeRequisitos(unittest.TestCase):
+class PruebasRecibePension(unittest.TestCase):
+    '''
+    Conjunto de pruebas de la funcion recibe_pension,
+    de no frontera, frontera frontera y de esquina para
+    sus argumentos en general
+    '''
+
+    # Configuracion 
+
     def setUp(self):
         '''
         Instancia el modulo Pension
@@ -279,30 +285,90 @@ class PruebasDeRequisitos(unittest.TestCase):
         '''
         self.p = None
 
-    def test_RecibePension1(self):
+    def test_RecibePensionMuyJoven(self):
+        '''
+        Prueba: Ejecutar la funcion con una edad muy joven
+        Resultado esperado: False
+        '''
+
         self.assertFalse(self.p.recibe_pension(2012, 'f', 750, 0))
-    def test_RecibePension2(self):
+
+    def test_RecibePensionJoven(self):
+        '''
+        Prueba: Ejecutar la funcion con una edad joven
+        Resultado esperado: False
+        '''
+
         self.assertFalse(self.p.recibe_pension(2000, 'm', 2131, 0))
-    def test_RecibePension3(self):
+
+    def test_RecibePensionSinHoras(self):
+        '''
+        Prueba: Ejecutar la funcion sin las horas cotizadas correctas
+        Resultado esperado: False
+        '''
+
         self.assertFalse(self.p.recibe_pension(1950, 'm', 200, 0))
 
-    def test_RecibePension4(self):
-        self.assertTrue(self.p.recibe_pension(1945, 'f', 750, 0))
-    def test_RecibePension5(self):
-        self.assertTrue(self.p.recibe_pension(1950, 'm', 1000, 0))
+    def test_RecibePensionJustoMujer(self):
+        '''
+        Prueba: Ejecutar la funcion con los datos justos para mujer
+        Resultado esperado: True
+        '''
 
-    def test_RecibePension6(self):
-        self.assertTrue(self.p.recibe_pension(1958, 'm', 750, 0))
-    def test_RecibePension7(self):
         self.assertTrue(self.p.recibe_pension(1963, 'f', 750, 0))
 
-    def test_RecibePension8(self):
-        self.assertFalse(self.p.recibe_pension(1959, 'm', 750, 0))
-    def test_RecibePension9(self):
+    def test_RecibePensionJustoHombre(self):
+        '''
+        Prueba: Ejecutar la funcion con los datos justos para hombre
+        Resultado esperado: True
+        '''
+
+        self.assertTrue(self.p.recibe_pension(1958, 'm', 750, 0))
+
+    def test_RecibePensionPorDebajoMujer(self):
+        '''
+        Prueba: Ejecutar la funcion con datos por debajo para hombre
+        Resultado esperado: False
+        '''
+
+        self.assertFalse(self.p.recibe_pension(1963, 'f', 749, 0))
         self.assertFalse(self.p.recibe_pension(1964, 'f', 750, 0))
 
-    def test_RecibePension10(self):
+
+    def test_RecibePensionPorDebajoHombre(self):
+        '''
+        Prueba: Ejecutar la funcion con datos por debajo para hombre
+        Resultado esperado: False
+        '''
+
+        self.assertFalse(self.p.recibe_pension(1958, 'm', 749, 0))
+        self.assertFalse(self.p.recibe_pension(1959, 'm', 750, 0))
+
+    def test_RecibePensionPorEncimaMujer(self):
+        '''
+        Prueba: Ejecutar la funcion con datos por encima para mujer
+        Resultado esperado: True
+        '''
+        self.assertTrue(self.p.recibe_pension(1962, 'f', 750, 0))
+        self.assertTrue(self.p.recibe_pension(1963, 'f', 751, 0))
+
+    def test_RecibePensionPorEncimaHombre(self):
+        '''
+        Prueba: Ejecutar la funcion con datos por encima para hombre
+        Resultado esperado: True
+        '''
+
+        self.assertTrue(self.p.recibe_pension(1957, 'm', 750, 0))
+        self.assertTrue(self.p.recibe_pension(1958, 'm', 751, 0))
+
+    def test_RecibePensionSinDatos(self):
+        '''
+        Prueba: Ejecutar la funcion sin datos reales
+        Resultado esperado: False
+        '''
+
         self.assertFalse(self.p.recibe_pension(0, 'f', 0, 0))
+        self.assertFalse(self.p.recibe_pension(0, 'm', 0, 0))
 
 class PruebasInsalubridad(unittest.TestCase):
     def setUp(self):
@@ -347,28 +413,28 @@ class PruebasMaliciaSexo(unittest.TestCase):
         self.p = None
 
     def test_IntroduceLetraIncorrecta1(self):
-    	'''
+        '''
         Prueba: Ejecuta la funcion con letra desconocida 'h' como parametro sexo
         Resultado esperado: Excepcion ValueError
         '''
         self.assertRaises(ValueError, self.p.recibe_pension, 1950, 'h', 1500, 0)
 
     def test_IntroduceLetraIncorrecta2(self):
-    	'''
+        '''
         Prueba: Ejecuta la funcion con letra desconocida 'k' como parametro sexo
         Resultado esperado: Excepcion ValueError
         '''
         self.assertRaises(ValueError, self.p.recibe_pension, 1950, 'k', 1500, 10)
 
     def test_IntroduceLetraIncorrecta3(self):
-    	'''
+        '''
         Prueba: Ejecuta la funcion con letra desconocida 'x' como parametro sexo
         Resultado esperado: Excepcion ValueError
         '''
         self.assertRaises(ValueError, self.p.recibe_pension, 1950, 'x', 1500, 5)
 
     def test_NoIntroduceLetra(self):
-    	'''
+        '''
         Prueba: Ejecuta la funcion con una letra vacia como parametro
         Resultado esperado: Excepcion ValueError
         '''
