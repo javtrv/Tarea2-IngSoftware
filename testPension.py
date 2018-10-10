@@ -105,14 +105,14 @@ class PruebasAnhoMayorQueActualMalicia(unittest.TestCase):
     def test_AnhoMayorQueAnhoNegativo1(self):
         '''
         Prueba: Ejecutar la funcion con un numero negativo bajo como argumento
-        Resultado esperado: False
+        Resultado esperado: Excepcion ValueError
         '''
         self.assertRaises(ValueError, self.p.anho_mayor_que_actual, -5)
 
     def test_AnhoMayorQueAnhoNegativo2(self):
         '''
         Prueba: Ejecutar la funcion con un numero negativo alto como argumento
-        Resultado esperado: False
+        Resultado esperado: Excepcion ValueError
         '''
         self.assertRaises(ValueError, self.p.anho_mayor_que_actual, -100000)
 
@@ -126,7 +126,7 @@ class PruebasAnhoMayorQueActualMalicia(unittest.TestCase):
     def test_AnhoConParametroString(self):
         '''
         Prueba: Ejecutar la funcion con un argumento string
-        Resultado esperado: Excepcion TypeError
+        Resultado esperado: Excepcion ValueError
         '''
         self.assertRaises(ValueError, self.p.anho_mayor_que_actual, '2010')
 
@@ -239,14 +239,14 @@ class PruebasCalcularEdadMalicia(unittest.TestCase):
     def test_CalculaEdadAnhoNegativo1(self):
         '''
         Prueba: Ejecuta la funcion con numero negativo bajo como parametro
-        Resultado esperado: 0
+        Resultado esperado: Excepcion ValueError
         '''
         self.assertRaises(ValueError, self.p.calcular_edad, -5)
 
     def test_CalculaEdadAnhoNegativo2(self):
         '''
         Prueba: Ejecuta la funcion con numero negativo alto como parametro
-        Resultado esperado: 0
+        Resultado esperado: Excepcion ValueError
         '''
         self.assertRaises(ValueError, self.p.calcular_edad, -1000000)
 
@@ -260,7 +260,7 @@ class PruebasCalcularEdadMalicia(unittest.TestCase):
     def test_EdadConParametroString(self):
         '''
         Prueba: Ejecutar la funcion con un argumento string
-        Resultado esperado: Excepcion TypeError
+        Resultado esperado: Excepcion ValueError
         '''
         self.assertRaises(ValueError, self.p.calcular_edad, '10')
 
@@ -413,6 +413,76 @@ class PruebasMaliciaInsalubridad(unittest.TestCase):
         Resultado esperado: Excepcion ValueError
         '''
         self.assertRaises(ValueError, self.p.recibe_pension, 1940, 'f', 1500, -10000000)
+
+class PruebasMaliciaAnhoNacimiento(unittest.TestCase):
+    '''
+    Conjunto de pruebas de malicia y casos invalidos 
+    del argumento anhoNacimiento para la funcion recibe_pension
+    '''
+
+    def setUp(self):
+        '''
+        Instancia el modulo Pension
+        '''
+        self.p = Pension()
+
+    def tearDown(self):
+        '''
+        Elimina la instancia del modulo Pension
+        asociada a la prueba
+        '''
+        self.p = None
+
+    def test_AnhoNegativo1(self):
+        '''
+        Prueba: Ejecutar la funcion con un numero negativo bajo como argumento de
+        anho de nacimiento
+        Resultado esperado: Excepcion ValueError
+        '''
+        self.assertRaises(ValueError, self.p.recibe_pension, -1950, 'f', 1500, 10)
+
+    def test_AnhoNegativo2(self):
+        '''
+        Prueba: Ejecutar la funcion con un numero negativo alto como argumento de
+        anho de nacimiento
+        Resultado esperado: Excepcion ValueError
+        '''
+        self.assertRaises(ValueError, self.p.recibe_pension, -10000000, 'f', 1500, 10)
+
+class PruebasMaliciaHorasCotizadas(unittest.TestCase):
+    '''
+    Conjunto de pruebas de malicia y casos invalidos 
+    del argumento horasCotizadas para la funcion recibe_pension
+    '''
+
+    def setUp(self):
+        '''
+        Instancia el modulo Pension
+        '''
+        self.p = Pension()
+
+    def tearDown(self):
+        '''
+        Elimina la instancia del modulo Pension
+        asociada a la prueba
+        '''
+        self.p = None
+
+    def test_AnhoNegativo1(self):
+        '''
+        Prueba: Ejecutar la funcion con un numero negativo bajo como argumento de
+        horas cotizadas
+        Resultado esperado: Excepcion ValueError
+        '''
+        self.assertRaises(ValueError, self.p.recibe_pension, 1950, 'f', -780, 10)
+
+    def test_AnhoNegativo2(self):
+        '''
+        Prueba: Ejecutar la funcion con un numero negativo alto como argumento de
+        horas cotizadas
+        Resultado esperado: Excepcion ValueError
+        '''
+        self.assertRaises(ValueError, self.p.recibe_pension, 1950, 'f', -10000000, 10)
 
 if __name__=="__main__":
     unittest.main()
