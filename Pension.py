@@ -36,8 +36,28 @@ class Pension:
 
         return self.anhoActual - anho_nacimiento
 
+def main():
+    p = Pension()
 
-#p = Pension()
-#fechaUsuario = input("Ingrese la fecha de nacimiento (dd/mm/aaaa): ")
-#anhoUsuario = fechaUsuario.split("/") #Se crea un vector de la forma [dd,mm,aaaa]
-#anhoUsuario = anhoUsuario[2]
+    fechaUsuario = input("Ingrese la fecha de nacimiento (dd/mm/aaaa): ")
+    sexo = input("Ingrese su sexo (m para masculino, f para femenino): ")
+    horasCotizadas = int(input("Ingrese la cantidad de horas cotizadas: "))
+    anhosInsalubres = int(input("Ingrese la cantidad de anhos insalubres: "))
+    
+    fechaUsuario = time.strptime(fechaUsuario, '%d/%m/%Y')
+    anhoUsuario = int(fechaUsuario.tm_year)
+
+    recibePension = p.RecibePension(
+        anhoUsuario, 
+        sexo, 
+        horasCotizadas, 
+        anhosInsalubres
+        )
+
+    if recibePension:
+        print("Usted debe recibir la pension del IVSS.")
+    else:
+        print("Usted NO recibe pension del IVSS.")
+
+if __name__ == '__main__':
+    main()
