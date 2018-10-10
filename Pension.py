@@ -5,7 +5,7 @@ class Pension:
     def RecibePension(self, anhoUsuario,sexo,horasCotizadas, anhosInsalubres):
         anhoActual = time.strftime("%Y")
         if anhosInsalubres < 4:
-            if self.CompararFecha(anhoUsuario) == 0:
+            if self.anho_mayor_que_actual(anhoUsuario) == 0:
                 if sexo == 'm':
                     if (int(anhoActual) - anhoUsuario) >= 60:
                         if horasCotizadas >= 750:
@@ -26,7 +26,7 @@ class Pension:
             anhosRebajados = anhosInsalubres / 4
             if anhosRebajados > 5:
                 anhosRebajados = 5
-            if self.CompararFecha(anhoUsuario) == 0:
+            if self.anho_mayor_que_actual(anhoUsuario) == 0:
                 if sexo == 'm':
                     if (int(anhoActual) - anhoUsuario) >= 60 - anhosRebajados:
                         if horasCotizadas >= 750:
@@ -44,12 +44,9 @@ class Pension:
                     else:
                         return True
 
-    def CompararFecha(self, anhoUsuario):
+    def anho_mayor_que_actual(self, anho):
         anhoActual = time.strftime("%Y")
-        if int(anhoActual) < anhoUsuario:
-            return True
-        else:
-            return False
+        return int(anhoActual) < anho
 
 #p = Pension()
 #fechaUsuario = input("Ingrese la fecha de nacimiento (dd/mm/aaaa): ")
