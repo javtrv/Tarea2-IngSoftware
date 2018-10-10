@@ -1,6 +1,7 @@
 import time
 
 class Pension:
+    anhoActual = int(time.strftime("%Y"))
 
     def RecibePension(self, anhoUsuario,sexo,horasCotizadas, anhosInsalubres):
         anhoActual = time.strftime("%Y")
@@ -45,8 +46,11 @@ class Pension:
                         return True
 
     def anho_mayor_que_actual(self, anho):
-        anhoActual = time.strftime("%Y")
-        return int(anhoActual) < anho
+        return self.anhoActual < anho
+
+    def calcular_edad(self, anho_nacimiento):
+        return self.anhoActual - anho_nacimiento
+
 
 #p = Pension()
 #fechaUsuario = input("Ingrese la fecha de nacimiento (dd/mm/aaaa): ")
