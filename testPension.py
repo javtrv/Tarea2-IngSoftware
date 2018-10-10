@@ -49,29 +49,29 @@ class PruebasDeRequisitos(unittest.TestCase):
     def tearDown(self):
         self.p = None
 
-##### PRUEBAS DE REQUISITOS EN RecibePension
+##### PRUEBAS DE REQUISITOS EN recibe_pension
 
     def test_RecibePension1(self):
-        self.assertFalse(self.p.RecibePension(2012, 'f', 750, 0))
+        self.assertFalse(self.p.recibe_pension(2012, 'f', 750, 0))
     def test_RecibePension2(self):
-        self.assertFalse(self.p.RecibePension(2000, 'm', 2131, 0))
+        self.assertFalse(self.p.recibe_pension(2000, 'm', 2131, 0))
     def test_RecibePension3(self):
-        self.assertFalse(self.p.RecibePension(1950, 'm', 200, 0))
+        self.assertFalse(self.p.recibe_pension(1950, 'm', 200, 0))
 
     def test_RecibePension4(self):
-        self.assertTrue(self.p.RecibePension(1945, 'f', 750, 0))
+        self.assertTrue(self.p.recibe_pension(1945, 'f', 750, 0))
     def test_RecibePension5(self):
-        self.assertTrue(self.p.RecibePension(1950, 'm', 1000, 0))
+        self.assertTrue(self.p.recibe_pension(1950, 'm', 1000, 0))
 
     def test_RecibePension6(self):
-    	self.assertTrue(self.p.RecibePension(1958, 'm', 750, 0))
+    	self.assertTrue(self.p.recibe_pension(1958, 'm', 750, 0))
     def test_RecibePension7(self):
-    	self.assertTrue(self.p.RecibePension(1963, 'f', 750, 0))
+    	self.assertTrue(self.p.recibe_pension(1963, 'f', 750, 0))
 
     def test_RecibePension8(self):
-    	self.assertFalse(self.p.RecibePension(1959, 'm', 750, 0))
+    	self.assertFalse(self.p.recibe_pension(1959, 'm', 750, 0))
     def test_RecibePension9(self):
-    	self.assertFalse(self.p.RecibePension(1964, 'f', 750, 0))
+    	self.assertFalse(self.p.recibe_pension(1964, 'f', 750, 0))
 
 class PruebasInsalubridad(unittest.TestCase):
     def setUp(self):
@@ -81,13 +81,13 @@ class PruebasInsalubridad(unittest.TestCase):
         self.p = None
 
     def test_Recibe_Pension_Sin_Insalubridad(self):
-        self.assertTrue(self.p.RecibePension(1960, 'f', 1500, 0))
+        self.assertTrue(self.p.recibe_pension(1960, 'f', 1500, 0))
 
     def test_Recibe_Pension_Con_Insalubridad(self):
-        self.assertTrue(self.p.RecibePension(1960, 'm', 1500, 10))
+        self.assertTrue(self.p.recibe_pension(1960, 'm', 1500, 10))
 
     def test_No_Recibe_Pension_Con_Insalubridad(self):
-        self.assertFalse(self.p.RecibePension(2010, 'f', 500, 15))
+        self.assertFalse(self.p.recibe_pension(2010, 'f', 500, 15))
 
 class PruebasMaliciaSexo(unittest.TestCase):
     def setUp(self):
@@ -97,16 +97,16 @@ class PruebasMaliciaSexo(unittest.TestCase):
         self.p = None
 
     def test_Introduce_Letra_Incorrecta1(self):
-        self.assertFalse(self.p.RecibePension(1950, 'h', 1500, 0))
+        self.assertFalse(self.p.recibe_pension(1950, 'h', 1500, 0))
 
     def test_Introduce_Letra_Incorrecta2(self):
-        self.assertFalse(self.p.RecibePension(1950, 'k', 1500, 10))
+        self.assertFalse(self.p.recibe_pension(1950, 'k', 1500, 10))
 
     def test_Introduce_Letra_Incorrecta3(self):
-        self.assertFalse(self.p.RecibePension(2050, 'q', 1500, 0))
+        self.assertFalse(self.p.recibe_pension(2050, 'q', 1500, 0))
 
     def test_No_Introduce_Letra(self):
-        self.assertFalse(self.p.RecibePension(2050, '', 1500, 0))
+        self.assertFalse(self.p.recibe_pension(2050, '', 1500, 0))
 
 if __name__=="__main__":
     unittest.main()
