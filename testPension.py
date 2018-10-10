@@ -1,10 +1,10 @@
 import unittest # Modulo para realizar pruebas unitarias
 from Pension import Pension # Modulo al cual se le haran las pruebas
 
-class PruebasAnhoMayor(unittest.TestCase):
+class PruebasAnhoMayorQueActual(unittest.TestCase):
     '''
-    Conjunto de pruebas de la funcion anho mayor,
-    de frontera y de esquina
+    Conjunto de pruebas de la funcion anho_mayor_que_actual,
+    de no frontera, frontera frontera y de esquina
     '''
 
     # Configuracion
@@ -61,25 +61,30 @@ class PruebasAnhoMayor(unittest.TestCase):
         '''
         self.assertTrue(self.p.anho_mayor_que_actual(2020))
 
-    def test_AnhoMayorQueAnho100000(self):
+    def test_AnhoMayorQueAnho2030(self):
         '''
-        Prueba: Ejecutar la funcion con 100000 como argumento
+        Prueba: Ejecutar la funcion con 2030 como argumento
         Resultado esperado: True
         '''
-        self.assertTrue(self.p.anho_mayor_que_actual(100000))
+        self.assertTrue(self.p.anho_mayor_que_actual(2030))
 
-class PruebasAnhoMayorMalicia(unittest.TestCase):
+class PruebasAnhoMayorQueActualMalicia(unittest.TestCase):
     '''
-    Conjunto de pruebas de malicia de la funcion anho mayor
+    Conjunto de pruebas de malicia y casos invalidos de 
+    la funcion anho_mayor_que_actual
     '''
 
     # Configuracion
 
     def setUp(self):
         '''
-        Instancia el modulo Pension
+        Instancia el modulo Pension y configura el anho actual
+        de manera directa para poder controlar las pruebas
         '''
         self.p = Pension()
+        self.p.anho_actual = 2018
+
+
 
     def tearDown(self):
         '''
@@ -89,6 +94,27 @@ class PruebasAnhoMayorMalicia(unittest.TestCase):
         self.p = None
 
     # Pruebas
+
+    def test_AnhoMayorQueAnho100000(self):
+        '''
+        Prueba: Ejecutar la funcion con 100000 como argumento
+        Resultado esperado: True
+        '''
+        self.assertTrue(self.p.anho_mayor_que_actual(100000))
+
+    def test_AnhoMayorQueAnhoNegativo1(self):
+        '''
+        Prueba: Ejecutar la funcion con un numero negativo bajo como argumento
+        Resultado esperado: False
+        '''
+        self.assertFalse(self.p.anho_mayor_que_actual(-5))
+
+    def test_AnhoMayorQueAnhoNegativo2(self):
+        '''
+        Prueba: Ejecutar la funcion con un numero negativo alto como argumento
+        Resultado esperado: False
+        '''
+        self.assertFalse(self.p.anho_mayor_que_actual(-100000))
 
     def test_AnhoSinParametros(self):
         '''
@@ -105,6 +131,13 @@ class PruebasAnhoMayorMalicia(unittest.TestCase):
         self.assertRaises(TypeError, self.p.anho_mayor_que_actual, '2010')
 
 class PruebasCalcularEdad(unittest.TestCase):
+    '''
+    Conjunto de pruebas de la funcion calcular_edad,
+    de no frontera, frontera frontera y de esquina
+    '''
+    
+    # Configuracion
+
     def setUp(self):
         '''
         Instancia el modulo Pension y configura el anho actual
@@ -120,20 +153,117 @@ class PruebasCalcularEdad(unittest.TestCase):
         '''
         self.p = None
 
-    def test_Calcula_Edad_Cero(self):
+    # Pruebas
+
+    def test_CalculaEdadCero(self):
+        '''
+        Prueba: Ejecuta la funcion con 2018 como parametro
+        Resultado esperado: 0
+        '''
         self.assertEqual(0, self.p.calcular_edad(2018))
 
-    def test_Calcula_Edad_10(self):
+    def test_CalculaEdad1(self):
+        '''
+        Prueba: Ejecuta la funcion con 2017 como parametro
+        Resultado esperado: 1
+        '''
+        self.assertEqual(1, self.p.calcular_edad(2017))
+
+    def test_CalculaEdad10(self):
+        '''
+        Prueba: Ejecuta la funcion con 2008 como parametro
+        Resultado esperado: 10
+        '''
         self.assertEqual(10, self.p.calcular_edad(2008))
 
-    def test_Calcula_Edad_21(self):
+    def test_CalculaEdad21(self):
+        '''
+        Prueba: Ejecuta la funcion con 1997 como parametro
+        Resultado esperado: 21
+        '''
         self.assertEqual(21, self.p.calcular_edad(1997))
 
-    def test_Calcula_Edad_No_Nacido(self):
+    def test_CalculaEdadNoNacido(self):
+        '''
+        Prueba: Ejecuta la funcion con 2027 como parametro
+        Resultado esperado: 0
+        '''
         self.assertEqual(0, self.p.calcular_edad(2027))
 
-    def test_Calcula_Edad_Anho_0(self):
+    def test_CalculaEdadNoNacido2(self):
+        '''
+        Prueba: Ejecuta la funcion con 5027 como parametro
+        Resultado esperado: 0
+        '''
+        self.assertEqual(0, self.p.calcular_edad(5027))
+
+    def test_CalculaEdadNoNacido3(self):
+        '''
+        Prueba: Ejecuta la funcion con 2019 como parametro
+        Resultado esperado: 0
+        '''
+        self.assertEqual(0, self.p.calcular_edad(2019))
+
+class PruebasCalcularEdadMalicia(unittest.TestCase):
+    '''
+    Conjunto de pruebas de malicia y casos invalidos 
+    de la funcion calcular_edad
+    '''
+
+    # Configuracion
+
+    def setUp(self):
+        '''
+        Instancia el modulo Pension y configura el anho actual
+        de manera directa para poder controlar las pruebas
+        '''
+        self.p = Pension()
+        self.p.anho_actual = 2018
+
+    def tearDown(self):
+        '''
+        Elimina la instancia del modulo Pension
+        asociada a la prueba
+        '''
+        self.p = None
+
+    # Pruebas
+
+    def test_CalculaEdadAnho0(self):
+        '''
+        Prueba: Ejecuta la funcion con 0 como parametro
+        Resultado esperado: 2018
+        '''
         self.assertEqual(2018, self.p.calcular_edad(0))
+
+    def test_CalculaEdadAnhoNegativo1(self):
+        '''
+        Prueba: Ejecuta la funcion con numero negativo bajo como parametro
+        Resultado esperado: 0
+        '''
+        self.assertEqual(0, self.p.calcular_edad(-5))
+
+    def test_CalculaEdadAnhoNegativo2(self):
+        '''
+        Prueba: Ejecuta la funcion con numero negativo alto como parametro
+        Resultado esperado: 0
+        '''
+        self.assertEqual(0, self.p.calcular_edad(-1000000))
+
+    def test_EdadSinParametros(self):
+        '''
+        Prueba: Ejecutar la funcion sin argumentos
+        Resultado esperado: Excepcion TypeError
+        '''
+        self.assertRaises(TypeError, self.p.calcular_edad)
+
+    def test_EdadConParametroString(self):
+        '''
+        Prueba: Ejecutar la funcion con un argumento string
+        Resultado esperado: Excepcion TypeError
+        '''
+        self.assertRaises(TypeError, self.p.calcular_edad, '10')
+
 
 class PruebasDeRequisitos(unittest.TestCase):
     def setUp(self):
