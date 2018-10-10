@@ -19,11 +19,14 @@ class Pension:
 
         # Devolvemos False si se introduce un anho incorrecto
         if self.anho_mayor_que_actual(anhoUsuario):
-            return False
+            raise ValueError("La fecha de nacimiento introducida es incorrecta.")
 
         # Devolvemos False si se introduce un sexo desconocidou
         if sexo not in ['m', 'M', 'f', 'F']:
-            return False
+            raise ValueError("El sexo introducido es incorrecto.")
+
+        if anhosInsalubres < 0:
+            raise ValueError('La cantidad de anhos insalubles es negativa.')
 
         # Si tiene menos de 4 anhos insalubres, lo ignoramos
         if anhosInsalubres < 4:
@@ -64,6 +67,8 @@ class Pension:
         Determina si un anho introducido es mayor
         al anho actual
         '''
+        if anho < 0 or type(anho) != int:
+            raise ValueError("El valor introducido como anho es incorrecto.")
 
         return self.anhoActual < anho
 
@@ -73,7 +78,10 @@ class Pension:
         de nacimiento con respecto al anho actual.
         '''
 
-        if anho_nacimiento > self.anhoActual or anho_nacimiento < 0:
+        if anho_nacimiento < 0 or type(anho_nacimiento) != int:
+            raise ValueError("El valor introducido como anho es incorrecto.")
+
+        if self.anho_mayor_que_actual(anho_nacimiento):
             return 0
 
         return self.anhoActual - anho_nacimiento
