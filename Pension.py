@@ -17,13 +17,21 @@ class Pension:
         del IVSS o no en el anho en curso.
         '''
 
-        # Devolvemos False si se introduce un anho incorrecto
+        # Generamos Excepcion si se introduce un anho incorrecto
         if self.anho_mayor_que_actual(anhoUsuario):
-            return False
+            raise ValueError("La fecha de nacimiento introducida es incorrecta.")
 
-        # Devolvemos False si se introduce un sexo desconocidou
+        # Generamos Excepcion si se introduce un sexo desconocidou
         if sexo not in ['m', 'M', 'f', 'F']:
-            return False
+            raise ValueError("El sexo introducido es incorrecto.")
+
+        # Generamos Excepcion si los anhos insalubres son negativos
+        if anhosInsalubres < 0:
+            raise ValueError('La cantidad de anhos insalubles es negativa.')
+
+        # Generamos Excepcion si las horas cotizadas son negativas
+        if horasCotizadas < 0:
+            raise ValueError('La cantidad de horas cotizadas es negativa.')
 
         # Si tiene menos de 4 anhos insalubres, lo ignoramos
         if anhosInsalubres < 4:
@@ -64,6 +72,8 @@ class Pension:
         Determina si un anho introducido es mayor
         al anho actual
         '''
+        if type(anho) != int or anho < 0:
+            raise ValueError("El valor introducido como anho es incorrecto.")
 
         return self.anhoActual < anho
 
@@ -73,7 +83,10 @@ class Pension:
         de nacimiento con respecto al anho actual.
         '''
 
-        if anho_nacimiento > self.anhoActual:
+        if type(anho_nacimiento) != int or anho_nacimiento < 0:
+            raise ValueError("El valor introducido como anho es incorrecto.")
+
+        if self.anho_mayor_que_actual(anho_nacimiento):
             return 0
 
         return self.anhoActual - anho_nacimiento
