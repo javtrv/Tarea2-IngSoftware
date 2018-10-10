@@ -328,6 +328,11 @@ class PruebasInsalubridad(unittest.TestCase):
         self.assertFalse(self.p.recibe_pension(2010, 'f', 500, 15))
 
 class PruebasMaliciaSexo(unittest.TestCase):
+    '''
+    Conjunto de pruebas de malicia y casos invalidos 
+    del argumento sexo para la funcion recibe_pension
+    '''
+
     def setUp(self):
         '''
         Instancia el modulo Pension
@@ -352,6 +357,46 @@ class PruebasMaliciaSexo(unittest.TestCase):
 
     def test_No_Introduce_Letra(self):
         self.assertFalse(self.p.recibe_pension(2050, '', 1500, 0))
+
+class PruebasMaliciaInsalubridad(unittest.TestCase):
+    '''
+    Conjunto de pruebas de malicia y casos invalidos 
+    del argumento anhos de insalubridad para la funcion recibe_pension
+    '''
+
+    def setUp(self):
+        '''
+        Instancia el modulo Pension
+        '''
+        self.p = Pension()
+
+    def tearDown(self):
+        '''
+        Elimina la instancia del modulo Pension
+        asociada a la prueba
+        '''
+        self.p = None
+
+    def test_IntroduceInsalubridadNegativa(self):
+        '''
+        Prueba: Ejecuta la funcion con numero negativo bajo como parametro
+        Resultado esperado: Excepcion ValueError
+        '''
+        self.assertFalse(self.p.recibe_pension(1940, 'f', 1500, -1))
+
+    def test_IntroduceInsalubridadNegativa2(self):
+        '''
+        Prueba: Ejecuta la funcion con numero negativo medio como parametro
+        Resultado esperado: Excepcion ValueError
+        '''
+        self.assertFalse(self.p.recibe_pension(1940, 'f', 1500, -100))
+
+    def test_IntroduceInsalubridadNegativa3(self):
+        '''
+        Prueba: Ejecuta la funcion con numero negativo alto como parametro
+        Resultado esperado: Excepcion ValueError
+        '''
+        self.assertFalse(self.p.recibe_pension(1940, 'f', 1500, -10000000))
 
 if __name__=="__main__":
     unittest.main()
