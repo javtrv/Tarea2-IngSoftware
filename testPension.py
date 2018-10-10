@@ -128,7 +128,7 @@ class PruebasAnhoMayorQueActualMalicia(unittest.TestCase):
         Prueba: Ejecutar la funcion con un argumento string
         Resultado esperado: Excepcion TypeError
         '''
-        self.assertRaises(TypeError, self.p.anho_mayor_que_actual, '2010')
+        self.assertRaises(ValueError, self.p.anho_mayor_que_actual, '2010')
 
 class PruebasCalcularEdad(unittest.TestCase):
     '''
@@ -241,14 +241,14 @@ class PruebasCalcularEdadMalicia(unittest.TestCase):
         Prueba: Ejecuta la funcion con numero negativo bajo como parametro
         Resultado esperado: 0
         '''
-        self.assertEqual(0, self.p.calcular_edad(-5))
+        self.assertRaises(ValueError, self.p.calcular_edad, -5)
 
     def test_CalculaEdadAnhoNegativo2(self):
         '''
         Prueba: Ejecuta la funcion con numero negativo alto como parametro
         Resultado esperado: 0
         '''
-        self.assertEqual(0, self.p.calcular_edad(-1000000))
+        self.assertRaises(ValueError, self.p.calcular_edad, -1000000)
 
     def test_EdadSinParametros(self):
         '''
@@ -262,7 +262,7 @@ class PruebasCalcularEdadMalicia(unittest.TestCase):
         Prueba: Ejecutar la funcion con un argumento string
         Resultado esperado: Excepcion TypeError
         '''
-        self.assertRaises(TypeError, self.p.calcular_edad, '10')
+        self.assertRaises(ValueError, self.p.calcular_edad, '10')
 
 
 class PruebasDeRequisitos(unittest.TestCase):
