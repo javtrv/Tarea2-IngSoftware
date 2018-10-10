@@ -73,6 +73,9 @@ class PruebasDeRequisitos(unittest.TestCase):
     def test_RecibePension9(self):
     	self.assertFalse(self.p.recibe_pension(1964, 'f', 750, 0))
 
+    def test_RecibePension10(self):
+    	self.assertFalse(self.p.recibe_pension(0, '', 0, 0))
+
 class PruebasInsalubridad(unittest.TestCase):
     def setUp(self):
         self.p = Pension()
