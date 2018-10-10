@@ -89,5 +89,24 @@ class PruebasInsalubridad(unittest.TestCase):
     def test_No_Recibe_Pension_Con_Insalubridad(self):
         self.assertFalse(self.p.RecibePension(2010, 'f', 500, 15))
 
+class PruebasMaliciaSexo(unittest.TestCase):
+    def setUp(self):
+        self.p = Pension()
+
+    def tearDown(self):
+        self.p = None
+
+    def test_Introduce_Letra_Incorrecta1(self):
+        self.assertFalse(self.p.RecibePension(1950, 'h', 1500, 0))
+
+    def test_Introduce_Letra_Incorrecta2(self):
+        self.assertFalse(self.p.RecibePension(1950, 'k', 1500, 10))
+
+    def test_Introduce_Letra_Incorrecta3(self):
+        self.assertFalse(self.p.RecibePension(2050, 'q', 1500, 0))
+
+    def test_No_Introduce_Letra(self):
+        self.assertFalse(self.p.RecibePension(2050, '', 1500, 0))
+
 if __name__=="__main__":
     unittest.main()
