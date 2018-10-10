@@ -6,22 +6,24 @@ class Pension:
     def RecibePension(self, anhoUsuario, sexo, horasCotizadas, anhosInsalubres):
         if self.anho_mayor_que_actual(anhoUsuario):
             return False
+        if sexo not in ['m', 'M', 'f', 'F']:
+            return False
 
         if anhosInsalubres < 4:
-            if sexo == 'm':
+            if sexo in ['m', 'M']:
                 if self.calcular_edad(anhoUsuario) >= 60:
                     return horasCotizadas >= 750
-            elif sexo == 'f':
+            elif sexo in ['f', 'F']:
                 if self.calcular_edad(anhoUsuario) >= 55:
                     return horasCotizadas >= 750
         else:
             anhosRebajados = anhosInsalubres / 4
             if anhosRebajados > 5:
                 anhosRebajados = 5
-            if sexo == 'm':
+            if sexo in ['m', 'M']:
                 if self.calcular_edad(anhoUsuario) >= (60 - anhosRebajados):
                     return horasCotizadas >= 750
-            elif sexo == 'f':
+            elif sexo in ['f', 'F']:
                 if self.calcular_edad(anhoUsuario) >= (55 - anhosRebajados):
                     return horasCotizadas >= 750
 
