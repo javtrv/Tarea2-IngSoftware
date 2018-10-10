@@ -107,14 +107,14 @@ class PruebasAnhoMayorQueActualMalicia(unittest.TestCase):
         Prueba: Ejecutar la funcion con un numero negativo bajo como argumento
         Resultado esperado: False
         '''
-        self.assertFalse(self.p.anho_mayor_que_actual(-5))
+        self.assertRaises(ValueError, self.p.anho_mayor_que_actual, -5)
 
     def test_AnhoMayorQueAnhoNegativo2(self):
         '''
         Prueba: Ejecutar la funcion con un numero negativo alto como argumento
         Resultado esperado: False
         '''
-        self.assertFalse(self.p.anho_mayor_que_actual(-100000))
+        self.assertRaises(ValueError, self.p.anho_mayor_que_actual, -100000)
 
     def test_AnhoSinParametros(self):
         '''
