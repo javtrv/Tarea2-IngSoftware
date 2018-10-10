@@ -274,9 +274,11 @@ class PruebasRecibePension(unittest.TestCase):
 
     def setUp(self):
         '''
-        Instancia el modulo Pension
+        Instancia el modulo Pension y configura el anho actual
+        de manera directa para poder controlar las pruebas
         '''
         self.p = Pension()
+        self.p.anho_actual = 2018
 
     def tearDown(self):
         '''
@@ -371,11 +373,19 @@ class PruebasRecibePension(unittest.TestCase):
         self.assertFalse(self.p.recibe_pension(0, 'm', 0, 0))
 
 class PruebasInsalubridad(unittest.TestCase):
+    '''
+    Conjunto de pruebas de la funcion recibe_pension,
+    de no frontera, frontera frontera y de esquina para
+    su argumento de anhosInsalubridad en particular
+    '''
+
     def setUp(self):
         '''
-        Instancia el modulo Pension
+        Instancia el modulo Pension y configura el anho actual
+        de manera directa para poder controlar las pruebas
         '''
         self.p = Pension()
+        self.p.anho_actual = 2018
 
     def tearDown(self):
         '''
@@ -384,14 +394,61 @@ class PruebasInsalubridad(unittest.TestCase):
         '''
         self.p = None
 
-    def test_Recibe_Pension_Sin_Insalubridad(self):
+    def test_RecibePensionSinInsalubridad(self):
+        '''
+        Prueba: Ejecutar la funcion con 0 como parametro de insalubridad
+        pero con otros datos correctos
+        Resultado esperado: True
+        '''
+
         self.assertTrue(self.p.recibe_pension(1960, 'f', 1500, 0))
 
-    def test_Recibe_Pension_Con_Insalubridad(self):
+    def test_RecibePensionConInsalubridad(self):
+        '''
+        Prueba: Ejecutar la funcion con 10 como parametro de insalubridad
+        y otros datos correctos
+        Resultado esperado: True
+        '''
+
         self.assertTrue(self.p.recibe_pension(1960, 'm', 1500, 10))
 
-    def test_No_Recibe_Pension_Con_Insalubridad(self):
+    def test_NoRecibePensionConInsalubridad(self):
+        '''
+        Prueba: Ejecutar la funcion con 15 como parametro de insalubridad
+        pero con otros datos insuficientes
+        Resultado esperado: False
+        '''
+
         self.assertFalse(self.p.recibe_pension(2010, 'f', 500, 15))
+        self.assertFalse(self.p.recibe_pension(1980, 'm', 1000, 15))
+
+    def test_RecibePensionPorDebajoConInsalubridad(self):
+        '''
+        Prueba: Ejecutar la funcion con datos por debajo
+        pero con el bono de insalubridad
+        Resultado esperado: True
+        '''
+
+        self.assertTrue(self.p.recibe_pension(1964, 'f', 750, 4))
+        self.assertTrue(self.p.recibe_pension(1959, 'm', 750, 4))
+        self.assertTrue(self.p.recibe_pension(1965, 'f', 750, 8))
+        self.assertTrue(self.p.recibe_pension(1960, 'm', 750, 8))
+        self.assertTrue(self.p.recibe_pension(1966, 'f', 750, 12))
+        self.assertTrue(self.p.recibe_pension(1961, 'm', 750, 12))
+        self.assertTrue(self.p.recibe_pension(1967, 'f', 750, 16))
+        self.assertTrue(self.p.recibe_pension(1962, 'm', 750, 16))
+        self.assertTrue(self.p.recibe_pension(1968, 'f', 750, 20))
+        self.assertTrue(self.p.recibe_pension(1963, 'm', 750, 20))
+
+    def test_RecibePensionPorDebajoConInsalubridadExtra(self):
+        '''
+        Prueba: Ejecutar la funcion con datos por debajo y con un bono
+        que se excede y no genera mas de 5 anos descontados
+        Resultado esperado: False
+        '''
+
+        self.assertFalse(self.p.recibe_pension(1969, 'f', 750, 30))
+        self.assertFalse(self.p.recibe_pension(1964, 'm', 750, 30))
 
 class PruebasMaliciaSexo(unittest.TestCase):
     '''
@@ -536,7 +593,7 @@ class PruebasMaliciaHorasCotizadas(unittest.TestCase):
 
     def test_AnhoNegativo1(self):
         '''
-        Prueba: Ejecutar la funcion con un numero negativo bajo como argumento de
+        Prueba: Ejecutar la funcion con un numero negativo como argumento de
         horas cotizadas
         Resultado esperado: Excepcion ValueError
         '''
