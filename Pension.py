@@ -10,18 +10,12 @@ class Pension:
         if anhosInsalubres < 4:
             if sexo == 'm':
                 if self.calcular_edad(anhoUsuario) >= 60:
-                    if horasCotizadas >= 750:
-                        return True
-                    else:
-                        return False
+                    return horasCotizadas >= 750
                 else:
                     return False
             elif sexo == 'f':
                 if self.calcular_edad(anhoUsuario) >= 55:
-                    if horasCotizadas >= 750:
-                        return True
-                    else:
-                        return False
+                    return horasCotizadas >= 750
                 else:
                     return False
         else:
@@ -30,18 +24,12 @@ class Pension:
                 anhosRebajados = 5
             if sexo == 'm':
                 if self.calcular_edad(anhoUsuario) >= (60 - anhosRebajados):
-                    if horasCotizadas >= 750:
-                        return True
-                    else:
-                        return False
+                    return horasCotizadas >= 750
                 else:
                     return False
             elif sexo == 'f':
                 if self.calcular_edad(anhoUsuario) >= (55 - anhosRebajados):
-                    if horasCotizadas >= 750:
-                        return True
-                    else:
-                        return False
+                    return horasCotizadas >= 750
                 else:
                     return False
 
