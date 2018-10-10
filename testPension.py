@@ -302,7 +302,7 @@ class PruebasDeRequisitos(unittest.TestCase):
         self.assertFalse(self.p.recibe_pension(1964, 'f', 750, 0))
 
     def test_RecibePension10(self):
-        self.assertFalse(self.p.recibe_pension(0, '', 0, 0))
+        self.assertFalse(self.p.recibe_pension(0, 'f', 0, 0))
 
 class PruebasInsalubridad(unittest.TestCase):
     def setUp(self):
@@ -346,17 +346,33 @@ class PruebasMaliciaSexo(unittest.TestCase):
         '''
         self.p = None
 
-    def test_Introduce_Letra_Incorrecta1(self):
-        self.assertFalse(self.p.recibe_pension(1950, 'h', 1500, 0))
+    def test_IntroduceLetraIncorrecta1(self):
+    	'''
+        Prueba: Ejecuta la funcion con letra desconocida 'h' como parametro sexo
+        Resultado esperado: Excepcion ValueError
+        '''
+        self.assertRaises(ValueError, self.p.recibe_pension, 1950, 'h', 1500, 0)
 
-    def test_Introduce_Letra_Incorrecta2(self):
-        self.assertFalse(self.p.recibe_pension(1950, 'k', 1500, 10))
+    def test_IntroduceLetraIncorrecta2(self):
+    	'''
+        Prueba: Ejecuta la funcion con letra desconocida 'k' como parametro sexo
+        Resultado esperado: Excepcion ValueError
+        '''
+        self.assertRaises(ValueError, self.p.recibe_pension, 1950, 'k', 1500, 10)
 
-    def test_Introduce_Letra_Incorrecta3(self):
-        self.assertFalse(self.p.recibe_pension(2050, 'q', 1500, 0))
+    def test_IntroduceLetraIncorrecta3(self):
+    	'''
+        Prueba: Ejecuta la funcion con letra desconocida 'x' como parametro sexo
+        Resultado esperado: Excepcion ValueError
+        '''
+        self.assertRaises(ValueError, self.p.recibe_pension, 1950, 'x', 1500, 5)
 
-    def test_No_Introduce_Letra(self):
-        self.assertFalse(self.p.recibe_pension(2050, '', 1500, 0))
+    def test_NoIntroduceLetra(self):
+    	'''
+        Prueba: Ejecuta la funcion con una letra vacia como parametro
+        Resultado esperado: Excepcion ValueError
+        '''
+        self.assertRaises(ValueError, self.p.recibe_pension, 1950, '', 1500, 7)
 
 class PruebasMaliciaInsalubridad(unittest.TestCase):
     '''
