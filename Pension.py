@@ -73,7 +73,7 @@ class Pension:
         de nacimiento con respecto al anho actual.
         '''
 
-        if anho_nacimiento > self.anhoActual:
+        if anho_nacimiento > self.anhoActual or anho_nacimiento < 0:
             return 0
 
         return self.anhoActual - anho_nacimiento
