@@ -28,6 +28,9 @@ class Pension:
         if anhosInsalubres < 0:
             raise ValueError('La cantidad de anhos insalubles es negativa.')
 
+        if horasCotizadas < 0:
+            raise ValueError('La cantidad de horas cotizadas es negativa.')
+
         # Si tiene menos de 4 anhos insalubres, lo ignoramos
         if anhosInsalubres < 4:
 
