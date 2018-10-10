@@ -49,6 +49,9 @@ class Pension:
         return self.anhoActual < anho
 
     def calcular_edad(self, anho_nacimiento):
+        if anho_nacimiento > self.anhoActual:
+            return 0
+            
         return self.anhoActual - anho_nacimiento
 
 
