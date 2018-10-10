@@ -23,4 +23,5 @@ python3 testPension.py
 ## Autores
 * Javier Medina (12-10400)
 * Andrés Ignacio Torres (14-11082)
+
 Integrantes del equipo *BIG Developers*.
