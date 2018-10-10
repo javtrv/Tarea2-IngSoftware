@@ -63,6 +63,16 @@ class PruebasDeRequisitos(unittest.TestCase):
     def test_RecibePension5(self):
         self.assertTrue(self.p.RecibePension(1950, 'm', 1000, 0))
 
+    def test_RecibePension6(self):
+    	self.assertTrue(self.p.RecibePension(1958, 'm', 750, 0))
+    def test_RecibePension7(self):
+    	self.assertTrue(self.p.RecibePension(1963, 'f', 750, 0))
+
+    def test_RecibePension8(self):
+    	self.assertFalse(self.p.RecibePension(1959, 'm', 750, 0))
+    def test_RecibePension9(self):
+    	self.assertFalse(self.p.RecibePension(1964, 'f', 750, 0))
+
 class PruebasInsalubridad(unittest.TestCase):
     def setUp(self):
         self.p = Pension()
