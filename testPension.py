@@ -36,7 +36,11 @@ class PruebasCalcularEdad(unittest.TestCase):
     def test_Calcula_Edad_21(self):
     	self.assertEqual(21, self.p.calcular_edad(1997))
 
+    def test_Calcula_Edad_No_Nacido(self):
+    	self.assertEqual(0, self.p.calcular_edad(2027))
 
+    def test_Calcula_Edad_Anho_0(self):
+    	self.assertEqual(2018, self.p.calcular_edad(0))
 
 class PruebasDeRequisitos(unittest.TestCase):
     def setUp(self):
