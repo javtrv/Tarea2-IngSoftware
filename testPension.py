@@ -102,16 +102,10 @@ class PruebasAnhoMayorQueActualMalicia(unittest.TestCase):
 
     def test_AnhoMayorQueAnhoNegativo1(self):
         '''
-        Prueba: Ejecutar la funcion con un numero negativo bajo como argumento
+        Prueba: Ejecutar la funcion con un numero negativo como argumento
         Resultado esperado: Excepcion ValueError
         '''
         self.assertRaises(ValueError, self.p.anho_mayor_que_actual, -5)
-
-    def test_AnhoMayorQueAnhoNegativo2(self):
-        '''
-        Prueba: Ejecutar la funcion con un numero negativo alto como argumento
-        Resultado esperado: Excepcion ValueError
-        '''
         self.assertRaises(ValueError, self.p.anho_mayor_que_actual, -100000)
 
     def test_AnhoSinParametros(self):
@@ -183,23 +177,11 @@ class PruebasCalcularEdad(unittest.TestCase):
 
     def test_CalculaEdadNoNacido(self):
         '''
-        Prueba: Ejecuta la funcion con 2027 como parametro
+        Prueba: Ejecuta la funcion con anhos en el futuro como parametro
         Resultado esperado: 0
         '''
         self.assertEqual(0, self.p.calcular_edad(2027))
-
-    def test_CalculaEdadNoNacido2(self):
-        '''
-        Prueba: Ejecuta la funcion con 5027 como parametro
-        Resultado esperado: 0
-        '''
         self.assertEqual(0, self.p.calcular_edad(5027))
-
-    def test_CalculaEdadNoNacido3(self):
-        '''
-        Prueba: Ejecuta la funcion con 2019 como parametro
-        Resultado esperado: 0
-        '''
         self.assertEqual(0, self.p.calcular_edad(2019))
 
 class PruebasCalcularEdadMalicia(unittest.TestCase):
@@ -236,16 +218,10 @@ class PruebasCalcularEdadMalicia(unittest.TestCase):
 
     def test_CalculaEdadAnhoNegativo1(self):
         '''
-        Prueba: Ejecuta la funcion con numero negativo bajo como parametro
+        Prueba: Ejecuta la funcion con numero negativo como parametro
         Resultado esperado: Excepcion ValueError
         '''
         self.assertRaises(ValueError, self.p.calcular_edad, -5)
-
-    def test_CalculaEdadAnhoNegativo2(self):
-        '''
-        Prueba: Ejecuta la funcion con numero negativo alto como parametro
-        Resultado esperado: Excepcion ValueError
-        '''
         self.assertRaises(ValueError, self.p.calcular_edad, -1000000)
 
     def test_EdadSinParametros(self):
@@ -294,13 +270,6 @@ class PruebasRecibePension(unittest.TestCase):
         '''
 
         self.assertFalse(self.p.recibe_pension(2012, 'f', 750, 0))
-
-    def test_RecibePensionJoven(self):
-        '''
-        Prueba: Ejecutar la funcion con una edad joven
-        Resultado esperado: False
-        '''
-
         self.assertFalse(self.p.recibe_pension(2000, 'm', 2131, 0))
 
     def test_RecibePensionSinHoras(self):
@@ -311,20 +280,13 @@ class PruebasRecibePension(unittest.TestCase):
 
         self.assertFalse(self.p.recibe_pension(1950, 'm', 200, 0))
 
-    def test_RecibePensionJustoMujer(self):
+    def test_RecibePensionJusto(self):
         '''
-        Prueba: Ejecutar la funcion con los datos justos para mujer
+        Prueba: Ejecutar la funcion con los datos justos
         Resultado esperado: True
         '''
 
         self.assertTrue(self.p.recibe_pension(1963, 'f', 750, 0))
-
-    def test_RecibePensionJustoHombre(self):
-        '''
-        Prueba: Ejecutar la funcion con los datos justos para hombre
-        Resultado esperado: True
-        '''
-
         self.assertTrue(self.p.recibe_pension(1958, 'm', 750, 0))
 
     def test_RecibePensionPorDebajoMujer(self):
@@ -471,23 +433,11 @@ class PruebasMaliciaSexo(unittest.TestCase):
 
     def test_IntroduceLetraIncorrecta1(self):
         '''
-        Prueba: Ejecuta la funcion con letra desconocida 'h' como parametro sexo
+        Prueba: Ejecuta la funcion con letra desconocida como parametro sexo
         Resultado esperado: Excepcion ValueError
         '''
         self.assertRaises(ValueError, self.p.recibe_pension, 1950, 'h', 1500, 0)
-
-    def test_IntroduceLetraIncorrecta2(self):
-        '''
-        Prueba: Ejecuta la funcion con letra desconocida 'k' como parametro sexo
-        Resultado esperado: Excepcion ValueError
-        '''
         self.assertRaises(ValueError, self.p.recibe_pension, 1950, 'k', 1500, 10)
-
-    def test_IntroduceLetraIncorrecta3(self):
-        '''
-        Prueba: Ejecuta la funcion con letra desconocida 'x' como parametro sexo
-        Resultado esperado: Excepcion ValueError
-        '''
         self.assertRaises(ValueError, self.p.recibe_pension, 1950, 'x', 1500, 5)
 
     def test_NoIntroduceLetra(self):
@@ -518,23 +468,11 @@ class PruebasMaliciaInsalubridad(unittest.TestCase):
 
     def test_IntroduceInsalubridadNegativa(self):
         '''
-        Prueba: Ejecuta la funcion con numero negativo bajo como parametro
+        Prueba: Ejecuta la funcion con numero negativo como parametro
         Resultado esperado: Excepcion ValueError
         '''
         self.assertRaises(ValueError, self.p.recibe_pension, 1940, 'f', 1500, -1)
-
-    def test_IntroduceInsalubridadNegativa2(self):
-        '''
-        Prueba: Ejecuta la funcion con numero negativo medio como parametro
-        Resultado esperado: Excepcion ValueError
-        '''
         self.assertRaises(ValueError, self.p.recibe_pension, 1940, 'f', 1500, -100)
-
-    def test_IntroduceInsalubridadNegativa3(self):
-        '''
-        Prueba: Ejecuta la funcion con numero negativo alto como parametro
-        Resultado esperado: Excepcion ValueError
-        '''
         self.assertRaises(ValueError, self.p.recibe_pension, 1940, 'f', 1500, -10000000)
 
 class PruebasMaliciaAnhoNacimiento(unittest.TestCase):
@@ -558,18 +496,11 @@ class PruebasMaliciaAnhoNacimiento(unittest.TestCase):
 
     def test_AnhoNegativo1(self):
         '''
-        Prueba: Ejecutar la funcion con un numero negativo bajo como argumento de
+        Prueba: Ejecutar la funcion con un numero negativo como argumento de
         anho de nacimiento
         Resultado esperado: Excepcion ValueError
         '''
         self.assertRaises(ValueError, self.p.recibe_pension, -1950, 'f', 1500, 10)
-
-    def test_AnhoNegativo2(self):
-        '''
-        Prueba: Ejecutar la funcion con un numero negativo alto como argumento de
-        anho de nacimiento
-        Resultado esperado: Excepcion ValueError
-        '''
         self.assertRaises(ValueError, self.p.recibe_pension, -10000000, 'f', 1500, 10)
 
 class PruebasMaliciaHorasCotizadas(unittest.TestCase):
@@ -591,20 +522,13 @@ class PruebasMaliciaHorasCotizadas(unittest.TestCase):
         '''
         self.p = None
 
-    def test_AnhoNegativo1(self):
+    def test_AnhoNegativo(self):
         '''
         Prueba: Ejecutar la funcion con un numero negativo como argumento de
         horas cotizadas
         Resultado esperado: Excepcion ValueError
         '''
         self.assertRaises(ValueError, self.p.recibe_pension, 1950, 'f', -780, 10)
-
-    def test_AnhoNegativo2(self):
-        '''
-        Prueba: Ejecutar la funcion con un numero negativo alto como argumento de
-        horas cotizadas
-        Resultado esperado: Excepcion ValueError
-        '''
         self.assertRaises(ValueError, self.p.recibe_pension, 1950, 'f', -10000000, 10)
 
 if __name__=="__main__":
