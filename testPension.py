@@ -100,7 +100,7 @@ class PruebasAnhoMayorQueActualMalicia(unittest.TestCase):
         '''
         self.assertTrue(self.p.anho_mayor_que_actual(100000))
 
-    def test_AnhoMayorQueAnhoNegativo1(self):
+    def test_AnhoMayorQueAnhoNegativo(self):
         '''
         Prueba: Ejecutar la funcion con un numero negativo como argumento
         Resultado esperado: Excepcion ValueError
@@ -216,7 +216,7 @@ class PruebasCalcularEdadMalicia(unittest.TestCase):
         '''
         self.assertEqual(2018, self.p.calcular_edad(0))
 
-    def test_CalculaEdadAnhoNegativo1(self):
+    def test_CalculaEdadAnhoNegativo(self):
         '''
         Prueba: Ejecuta la funcion con numero negativo como parametro
         Resultado esperado: Excepcion ValueError
@@ -431,7 +431,7 @@ class PruebasMaliciaSexo(unittest.TestCase):
         '''
         self.p = None
 
-    def test_IntroduceLetraIncorrecta1(self):
+    def test_IntroduceLetraIncorrecta(self):
         '''
         Prueba: Ejecuta la funcion con letra desconocida como parametro sexo
         Resultado esperado: Excepcion ValueError
@@ -494,7 +494,7 @@ class PruebasMaliciaAnhoNacimiento(unittest.TestCase):
         '''
         self.p = None
 
-    def test_AnhoNegativo1(self):
+    def test_AnhoNegativo(self):
         '''
         Prueba: Ejecutar la funcion con un numero negativo como argumento de
         anho de nacimiento
@@ -522,7 +522,7 @@ class PruebasMaliciaHorasCotizadas(unittest.TestCase):
         '''
         self.p = None
 
-    def test_AnhoNegativo(self):
+    def test_HorasNegativas(self):
         '''
         Prueba: Ejecutar la funcion con un numero negativo como argumento de
         horas cotizadas
